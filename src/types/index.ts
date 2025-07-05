@@ -22,6 +22,14 @@ export interface ThemeContextType {
 
 export type TodoItemProps = {
   todoItem: TodoItem;
+  toggleTodo: (id: number) => void;
   editTodo: (id: number, newText: string) => void;
   deleteTodo: (id: number) => void;
 };
+
+export type filterOptions = "all" | "active" | "completed";
+
+export interface FilterContextType {
+  filter: filterOptions;
+  switchFilter: (newFilter: filterOptions) => void;
+}

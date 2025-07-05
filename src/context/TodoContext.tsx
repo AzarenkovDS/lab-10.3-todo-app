@@ -24,11 +24,21 @@ function TodoProvider({ children }: { children: ReactNode }) {
   };
 
   const toggleTodo = (id: number): void => {
-    console.log(id);
+    setTodoItems((prev) => {
+      return prev.map((todoItem) =>
+        todoItem.id === id
+          ? { ...todoItem, completed: !todoItem.completed }
+          : todoItem
+      );
+    });
   };
 
   const editTodo = (id: number, newText: string): void => {
-    console.log(id);
+    setTodoItems((prev) => {
+      return prev.map((todoItem) =>
+        todoItem.id === id ? { ...todoItem, text: newText } : todoItem
+      );
+    });
   };
 
   const deleteTodo = (id: number): void => {
@@ -38,7 +48,9 @@ function TodoProvider({ children }: { children: ReactNode }) {
   };
 
   const clearCompleted = (): void => {
-    console.log("clear");
+    setTodoItems((prev) => {
+      return prev.filter((todoItem) => !todoItem.completed);
+    });
   };
 
   const todoValue = useMemo(
